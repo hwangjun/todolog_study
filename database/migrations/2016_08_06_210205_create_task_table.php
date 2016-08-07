@@ -14,6 +14,13 @@ class CreateTaskTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('project_id')->unsigned();
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->string('name',20);
+            $table->text('description')->nullable();
+            $table->dateTime('due_date')->nullable();
+            $table->enum('priority',['낮음','보통','높음'])->default('보통');
+            $table->enum('status',['등록','진행','완료'])->default('등록');
             $table->timestamps();
         });
     }

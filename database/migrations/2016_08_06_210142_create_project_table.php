@@ -14,13 +14,18 @@ class CreateProjectTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('name',20);
+            $table->text('description')->nullable();
+            $table->boolean('public')->default(false);
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
+     *W
      * @return void
      */
     public function down()

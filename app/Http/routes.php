@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/','WelcomeController@index');
+
+//추가된 라우팅
+Route::auth();
+Route::get('/home', 'HomeController@index');
+Route::get('auth/github', 'Auth\AuthController@redirectToGitHub');
+Route::get('auth/github/callback', 'Auth\AuthController@handleGitHubCallback');
+Route::get('github-id',function(){
+    return session('key');
 });
+
